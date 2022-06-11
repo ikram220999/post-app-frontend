@@ -6,23 +6,14 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import Staff from "./staf/Staff";
 import Stor from "./stor/Stor";
-import Login from './login/Login';
+import Login from "./login/Login";
+import Sidebar from './pages/sidebar/Sidebar';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-
-    <BrowserRouter>
-      <Routes>
-    
-          <Route path="/" element={<App />} />
-          <Route path="staf" element={<Staff />} />
-          <Route path="stor" element={<Stor />} />
-          <Route path="login" element={<Login/>} />
-
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter basename="/">
+    <App />
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
