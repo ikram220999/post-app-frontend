@@ -1,79 +1,58 @@
-import { Pagination, Table } from "flowbite-react";
+import { Badge, Pagination, Table } from "flowbite-react";
 import React from "react";
 
-const PaginationTable = () => {
+const PaginationTable = ({ data = [] }) => {
   return (
     <div className="flex flex-col mb-4">
-      <Table striped={true}>
+      <Table striped={true} className="rounded-md">
         <Table.Head>
+          <Table.HeadCell className="bg-red-500 text-white text-left">id</Table.HeadCell>
           <Table.HeadCell className="bg-red-500 text-white">
-            Product name
+            Staff Name
           </Table.HeadCell>
           <Table.HeadCell className="bg-red-500 text-white">
-            Color
+            Staff No
           </Table.HeadCell>
           <Table.HeadCell className="bg-red-500 text-white">
-            Category
+            Phone No
           </Table.HeadCell>
           <Table.HeadCell className="bg-red-500 text-white">
-            Price
+            Address
           </Table.HeadCell>
           <Table.HeadCell className="bg-red-500 text-white">
             <span className="sr-only">Edit</span>
           </Table.HeadCell>
         </Table.Head>
-        <Table.Body className="divide-y">
-          <Table.Row className="bg-white ">
-            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 ">
-              Apple MacBook Pro 17"
-            </Table.Cell>
-            <Table.Cell>Sliver</Table.Cell>
-            <Table.Cell>Laptop</Table.Cell>
-            <Table.Cell>$2999</Table.Cell>
-            <Table.Cell>
-              <a
-                href="/tables"
-                className="font-medium text-blue-600 hover:underline "
-              >
-                Edit
-              </a>
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row className="bg-white ">
-            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 ">
-              Apple MacBook Pro 17"
-            </Table.Cell>
-            <Table.Cell>Sliver</Table.Cell>
-            <Table.Cell>Laptop</Table.Cell>
-            <Table.Cell>$2999</Table.Cell>
-            <Table.Cell>
-              <a
-                href="/tables"
-                className="font-medium text-blue-600 hover:underline "
-              >
-                Edit
-              </a>
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row className="bg-white ">
-            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 ">
-              Apple MacBook Pro 17"
-            </Table.Cell>
-            <Table.Cell>Sliver</Table.Cell>
-            <Table.Cell>Laptop</Table.Cell>
-            <Table.Cell>$2999</Table.Cell>
-            <Table.Cell>
-              <a
-                href="/tables"
-                className="font-medium text-blue-600 hover:underline "
-              >
-                Edit
-              </a>
-            </Table.Cell>
-          </Table.Row>
+
+        <Table.Body className="divide-y ">
+          {data.map((staff) => (
+            <Table.Row className="bg-white ">
+              <Table.Cell className="">{staff.id}</Table.Cell>
+              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 ">
+                {staff.name}
+              </Table.Cell>
+              <Table.Cell><span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+                  {staff.staff_no}
+                </span></Table.Cell>
+              <Table.Cell>{staff.phone_no}</Table.Cell>
+              <Table.Cell>
+                {" "}
+                
+                {staff.address}
+              </Table.Cell>
+              <Table.Cell>
+                <a
+                  href="/tables"
+                  className="font-medium text-blue-600 hover:underline "
+                >
+                  Edit
+                </a>
+              </Table.Cell>
+            </Table.Row>
+          ))}
         </Table.Body>
       </Table>
-      <div className="flex-end w-full mt-0.5">
+      <div className="flex w-full mt-0.5">
         <Pagination
           className="w-full"
           currentPage={1}

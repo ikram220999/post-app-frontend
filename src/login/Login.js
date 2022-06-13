@@ -10,6 +10,8 @@ const Login = () => {
   const handeLogin = () => {
     localStorage.setItem("name", login.username);
     localStorage.setItem("password", login.password);
+
+    history.push("/dashboard")
   };
 
   // useEffect(() => {
