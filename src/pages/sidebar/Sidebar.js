@@ -10,7 +10,7 @@ const Sidebar = () => {
           <p className="text-xl font-bold">Hantar App</p>
         </div>
         <ul class="space-y-2">
-          <Link to={"/dash/login"}>
+          <Link to={"/"}>
             <li className="">
               <a
                 href="#"
@@ -29,7 +29,7 @@ const Sidebar = () => {
               </a>
             </li>
           </Link>
-          <Link to={"dash/default"}>
+          <Link to={"/item"}>
             <li>
               <a
                 href="#"
@@ -50,6 +50,7 @@ const Sidebar = () => {
               </a>
             </li>
           </Link>
+          <Link to={'/stor'}>
           <li>
             <a
               href="#"
@@ -70,26 +71,29 @@ const Sidebar = () => {
               </span>
             </a>
           </li>
-          <li>
-            <a
-              href="#"
-              class="flex items-center p-2 text-gray-100 font-semibold rounded-lg  hover:bg-red-700 hover:text-white "
-            >
-              <svg
-                class="w-6 h-6 text-gray-100 transition duration-75 group-hover:text-gray-100 group-hover:text-white"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
+          </Link>
+          <Link to={'/staff'}>
+            <li>
+              <a
+                href="#"
+                class="flex items-center p-2 text-gray-100 font-semibold rounded-lg  hover:bg-red-700 hover:text-white "
               >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                  clip-rule="evenodd"
-                ></path>
-              </svg>
-              <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
-            </a>
-          </li>
+                <svg
+                  class="w-6 h-6 text-gray-100 transition duration-75 group-hover:text-gray-100 group-hover:text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
+              </a>
+            </li>
+          </Link>
         </ul>
       </div>
     </aside>

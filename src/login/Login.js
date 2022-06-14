@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, browserHistory } from "react-router-dom";
 
 const Login = () => {
   const [login, setLogin] = useState({});
@@ -7,11 +7,11 @@ const Login = () => {
 
   const history = useNavigate();
 
-  const handeLogin = () => {
+  const handeLogin = (e) => {
     localStorage.setItem("name", login.username);
     localStorage.setItem("password", login.password);
-
-    history.push("/dashboard")
+    history("/");
+    window.location.reload(true);
   };
 
   // useEffect(() => {

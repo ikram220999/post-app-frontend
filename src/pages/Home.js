@@ -23,7 +23,7 @@ function Home() {
         </div> */}
 
         <div>
-          <Link to={"/dash/login"}>
+          <Link to={"/sign-in"}>
             <button className="rounded-lg bg-red-700 hover:bg-white hover:text-red-500 transition duration-200 ease px-4 py-2">
               <b>Log masuk</b>
             </button>
