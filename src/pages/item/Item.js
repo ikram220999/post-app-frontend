@@ -9,7 +9,6 @@ const Item = () => {
         <Link to={'/item/new'}>
           <Button className="bg-red-400 hover:bg-red-500">+ Item</Button>
         </Link>
-        <Outlet />
       </div>{" "}
     </>
   );

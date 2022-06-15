@@ -8,6 +8,7 @@ import {
 } from "flowbite-react";
 import React, { useState, useEffect } from "react";
 import { FaWarehouse } from "react-icons/fa";
+import  axios  from "axios";
 
 const NewItem = () => {
   const [item, setItem] = useState({
@@ -15,22 +16,39 @@ const NewItem = () => {
     weight: 0,
     store: "",
     date: "",
+    tracking: "",
   });
+  const [store, setStore] = useState([]);
 
- let tracking = "";
- console.log(tracking)
+  let tracking = "";
+  console.log(tracking);
 
   console.log("item", item);
 
   const trackingGen = () => {
     const alphanum = "QWERTYUIOPASDFGHJKLZXCVBNM1234567890";
-    let tracking = "";
+    let trackingg = "";
     for (let i = 0; i < 8; i++) {
-      tracking += alphanum[Math.floor(Math.random() * alphanum.length)];
+      trackingg += alphanum[Math.floor(Math.random() * alphanum.length)];
     }
 
-    console.log(tracking);
-    return tracking;
+    console.log(trackingg);
+    setItem({
+      ...item,
+      tracking: trackingg,
+    });
+  };
+
+  const getAllStore = () => {
+    axios
+      .get("http://localhost:8000/api/store")
+      .then(function (response) {
+        console.log("all store", response);
+        setStore(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   const handleChange = (e) => {
@@ -43,11 +61,7 @@ const NewItem = () => {
   };
 
   useEffect(() => {
-    const alphanum = "QWERTYUIOPASDFGHJKLZXCVBNM1234567890";
-    // let trcking = "";
-    for (let i = 0; i < 8; i++) {
-      tracking += alphanum[Math.floor(Math.random() * alphanum.length)];
-    };
+    getAllStore();
   }, []);
 
   return (
@@ -57,8 +71,11 @@ const NewItem = () => {
       </div>
       <Card className="p-4">
         <form className="flex flex-col gap-2">
-          <p className="text-2xl font-semibold mb-10 rounded-md bg-red-100 px-4 py-2 w-fit">
-            {tracking}
+          <Button onClick={trackingGen} className="bg-red-500">
+            Generate Tracking
+          </Button>
+          <p className="text-2xl font-semibold mb-10 rounded-md bg-red-100 px-4 py-2 w-fit w-40 h-12 text-center">
+            {item.tracking}
           </p>
           <div>
             <Label className="mb-2 block" htmlFor="email1">
@@ -103,30 +120,61 @@ const NewItem = () => {
               <option value={""} disabled>
                 Select Store
               </option>
-              <option value={"1"}>Penang</option>
-              <option value={"2"}>Kedah</option>
-              <option value={"3"}>Kuala Lumpur</option>
-              <option value={"4"}>Pahang</option>
+              {store.map((stor) => {
+                return(
+                  <option value={stor.id}>{stor.name}</option>
+                )
+              })}
             </Select>
+          </div>
+          <div className="my-8 border-b-2 border-gray-200"></div>
+          <div>
+            <Label className="mb-2 block" htmlFor="password1">
+              Receiver Name
+            </Label>
+            <TextInput
+              name="rcv_name"
+              type="text"
+              placeholder=""
+              required={true}
+              onChange={""}
+              // value={""}
+              className="py-2 px-4 outline-red-400"
+            />
           </div>
           <div>
             <Label className="mb-2 block" htmlFor="password1">
-              Date
+              Receiver Phone No
             </Label>
             <TextInput
-              name="date"
-              type="date"
+              name="rcv_phone"
+              type="text"
+              placeholder=""
               required={true}
-              value={item.date}
-              onChange={handleChange}
-              className="py-2 px-4 outline-red-400 text-gray-500"
+              onChange={""}
+              // value={""}
+              className="py-2 px-4 outline-red-400"
             />
           </div>
+          <div>
+            <Label className="mb-2 block" htmlFor="password1">
+            Receiver Address
+            </Label>
+            <TextInput
+              name="rcv_address"
+              type="text"
+              placeholder=""
+              required={true}
+              onChange={""}
+              // value={""}
+              className="py-2 px-4 outline-red-400"
+            />
+          </div>
+
+
+          
           <div className="w-full mt-5 flex justify-end">
-            <Button
-              type="submit"
-              className="bg-red-600 hover:bg-red-700 w-1/12"
-            >
+            <Button type="submit" className="bg-red-600 hover:bg-red-700 ">
               Submit
             </Button>
           </div>
