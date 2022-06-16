@@ -8,7 +8,7 @@ import {
 } from "flowbite-react";
 import React, { useState, useEffect } from "react";
 import { FaWarehouse } from "react-icons/fa";
-import  axios  from "axios";
+import axios from "axios";
 
 const NewItem = () => {
   const [item, setItem] = useState({
@@ -17,8 +17,14 @@ const NewItem = () => {
     store: "",
     date: "",
     tracking: "",
+    state: "",
+    rcv_name: "",
+    rcv_phone: "",
+    rcv_address: "",
   });
   const [store, setStore] = useState([]);
+  const [state, setState] = useState([]);
+  const [selectedState, setSelectedState] = useState("");
 
   let tracking = "";
   console.log(tracking);
@@ -37,6 +43,18 @@ const NewItem = () => {
       ...item,
       tracking: trackingg,
     });
+  };
+
+  const getAllState = () => {
+    axios
+      .get("http://localhost:8000/api/state")
+      .then(function (response) {
+        console.log("all store", response);
+        setState(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   const getAllStore = () => {
@@ -60,9 +78,26 @@ const NewItem = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:8000/api/item/new", item)
+      .then(function (response) {
+        console.log("success new item", response)
+        alert("success");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
+    getAllState();
     getAllStore();
   }, []);
+
+  useEffect(() => {}, [selectedState]);
 
   return (
     <>
@@ -77,6 +112,10 @@ const NewItem = () => {
           <p className="text-2xl font-semibold mb-10 rounded-md bg-red-100 px-4 py-2 w-fit w-40 h-12 text-center">
             {item.tracking}
           </p>
+          <p className="text-xl font-semibold text-gray-400 mb-4">
+            Item Details{" "}
+          </p>
+
           <div>
             <Label className="mb-2 block" htmlFor="email1">
               Item Name
@@ -108,7 +147,7 @@ const NewItem = () => {
           </div>
           <div>
             <Label className="mb-2 block" htmlFor="password1">
-              Warehouse
+              Store
             </Label>
             <Select
               name="store"
@@ -121,60 +160,83 @@ const NewItem = () => {
                 Select Store
               </option>
               {store.map((stor) => {
-                return(
-                  <option value={stor.id}>{stor.name}</option>
-                )
+                return <option value={stor.id}>{stor.name}</option>;
               })}
             </Select>
           </div>
           <div className="my-8 border-b-2 border-gray-200"></div>
+
+          <p className="text-xl font-semibold text-gray-400 mb-4">
+            Receiver Details{" "}
+          </p>
           <div>
             <Label className="mb-2 block" htmlFor="password1">
-              Receiver Name
+              Name
             </Label>
             <TextInput
               name="rcv_name"
               type="text"
               placeholder=""
               required={true}
-              onChange={""}
-              // value={""}
+              onChange={handleChange}
+              value={item.rcv_name}
               className="py-2 px-4 outline-red-400"
             />
           </div>
           <div>
             <Label className="mb-2 block" htmlFor="password1">
-              Receiver Phone No
+              Phone No
             </Label>
             <TextInput
               name="rcv_phone"
               type="text"
               placeholder=""
               required={true}
-              onChange={""}
-              // value={""}
+              onChange={handleChange}
+              value={item.rcv_phone}
               className="py-2 px-4 outline-red-400"
             />
           </div>
           <div>
             <Label className="mb-2 block" htmlFor="password1">
-            Receiver Address
+              State
+            </Label>
+            <Select
+              name="state"
+              className="py-2 px-4 outline-red-400"
+              required={true}
+              onChange={handleChange}
+              value={item.state}
+            >
+              <option value={""} disabled>
+                Select State
+              </option>
+              {state.map((stat) => {
+                return <option value={stat.id}>{stat.name}</option>;
+              })}
+            </Select>
+          </div>
+          <div>
+            <Label className="mb-2 block" htmlFor="password1">
+              Address
             </Label>
             <TextInput
               name="rcv_address"
               type="text"
               placeholder=""
               required={true}
-              onChange={""}
-              // value={""}
+              onChange={handleChange}
+              value={item.rcv_address}
               className="py-2 px-4 outline-red-400"
             />
           </div>
 
-
-          
           <div className="w-full mt-5 flex justify-end">
-            <Button type="submit" className="bg-red-600 hover:bg-red-700 ">
+            <Button
+              onClick={handleSubmit}
+              type="submit"
+              className="bg-red-600 hover:bg-red-700 "
+            >
               Submit
             </Button>
           </div>
