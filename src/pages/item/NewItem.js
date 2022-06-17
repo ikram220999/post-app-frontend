@@ -230,6 +230,7 @@ const NewItem = () => {
               className="py-2 px-4 outline-red-400"
             />
           </div>
+          {/* testing new component */}
 
           <div className="w-full mt-5 flex justify-end">
             <Button
