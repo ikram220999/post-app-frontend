@@ -11,6 +11,7 @@ import Staff from "./../staf/Staff";
 import Stor from "./../stor/Stor";
 import Item from "./../pages/item/Item";
 import NewItem from "../pages/item/NewItem";
+import ViewItem from "../pages/item/ViewItem";
 
 const DashboardLayout = () => {
   return (
@@ -18,16 +19,21 @@ const DashboardLayout = () => {
       <div>
         <div className="flex flex-row bg-gray-100 full p-0">
           {" "}
-          <div className="w-1/5">
+          <div className="w-1/5 mr-2">
             <Sidebar />{" "}
           </div>
-          <div className="w-full min-h-screen p-10">
+          <div className="w-4/5 min-h-screen p-10">
             <Routes>
               <Route path="/" element={<Dashboard />} exact />
+
               <Route path="/staff" element={<Staff />} />
+
               <Route path="/stor" element={<Stor />} />
+
               <Route path="/item" element={ <Item />} />
+              <Route path="/item/:id" element={ <ViewItem />} />
               <Route path="/item/new" element={<NewItem />} />
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>{" "}
