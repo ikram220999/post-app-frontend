@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Card } from "flowbite-react";
+import { Button, Card, Label, Modal, Select, TextInput } from "flowbite-react";
 import parcelImg from "../../images/parcel.jpg";
 import personImg from "../../images/person.jpg";
-import Dashboard from './../dashboard/Dashboard';
+import Dashboard from "./../dashboard/Dashboard";
 import Spinner from "../../components/Spinner";
+import ModalStatus from "./ModalStatusItem";
 
 const ViewItem = () => {
   const { id } = useParams();
@@ -13,6 +14,15 @@ const ViewItem = () => {
   const [item, setItem] = useState();
   const [staff, setStaff] = useState();
   const [receiver, setReceiver] = useState();
+  const [showModal, setShowModal] = useState(false);
+
+  const [formStatus, setFormStatus] = useState({
+    title: "",
+    description: "",
+    status: "",
+  });
+
+  console.log("formStatus", formStatus);
 
   console.log(id);
   const getItem = () => {
@@ -29,21 +39,115 @@ const ViewItem = () => {
       });
   };
 
+  const handleSubmitStatus = () =>{
+
+  }
+
+  const handleForm = (e) => {
+    setFormStatus({
+        ...formStatus,
+        [e.target.name]: e.target.value,
+    })
+  }
+
+  const handleModal = () => {
+    setShowModal(true);
+  }
+  const closeModal = () => {
+    setShowModal(false);
+  }
+
+  const modal = () => {
+    return (
+      <React.Fragment>
+        <Button
+          onClick={handleModal}
+          className="hover:bg-red-600 bg-red-500 text-white"
+          color="failure"
+        >
+          Update Status
+        </Button>
+
+        <Modal show={showModal} onClose={closeModal}>
+            <Modal.Header><div className="py-3 px-4">Update Status</div></Modal.Header>
+          <Modal.Body>
+            <div className="space-y-6">
+            <div>
+            <Label className="mb-2 block" htmlFor="password1">
+              Title
+            </Label>
+            <TextInput
+              name="title"
+              type="text"
+              placeholder=""
+              required={true}
+              onChange={handleForm}
+              value={formStatus.title}
+              className="py-2 px-4 outline-red-400"
+            />
+          </div>            
+            <div>
+            <Label className="mb-2 block" htmlFor="password1">
+              Status
+            </Label>
+            <Select
+              name="status"
+              className="py-2 px-4 outline-red-400"
+              required={true}
+              onChange={handleForm}
+              value={formStatus.status}
+            >
+              <option value={""} disabled>
+                Select Status
+              </option>
+              <option value="PD">Driver Pickup</option>
+              <option value="O">On the way</option>
+              <option value="D">Delivered</option>
+            </Select>
+          </div>
+          <div>
+            <Label className="mb-2 block" htmlFor="password1">
+              Description
+            </Label>
+            <TextInput
+              name="description"
+              type="text"
+              placeholder=""
+              required={true}
+              onChange={handleForm}
+              value={formStatus.description}
+              className="py-2 px-4 outline-red-400"
+            />
+          </div>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <div className="flex flex-row justify-between w-full">
+                
+            <Button onClick={closeModal} className="bg-gray-200  hover:bg-gray-300" color="black">Cancel</Button>
+            <Button onClick={handleSubmitStatus} className="bg-red-400 text-white hover:bg-red-500" color="black">Update</Button>
+            </div>
+
+          </Modal.Footer>
+        </Modal>
+      </React.Fragment>
+    );
+  };
+
   useEffect(() => {
     getItem();
   }, []);
 
   return (
     <>
-      <div className="m-3 mb-6">
-      
+      <div className="m-3 mb-6 flex flex-row justify-between">
+        <div>
           <ol class="inline-flex items-center space-x-1 md:space-x-3">
             <li class="inline-flex items-center">
               <a
                 href="#"
                 class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               >
-            
                 Dashboard
               </a>
             </li>
@@ -65,7 +169,7 @@ const ViewItem = () => {
                   href="#"
                   class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white"
                 >
-                  View 
+                  View
                 </a>
               </div>
             </li>
@@ -89,7 +193,8 @@ const ViewItem = () => {
               </div>
             </li>
           </ol>
-     
+        </div>
+        <div>{modal()}</div>
       </div>
       {item ? (
         <div className="grid gap-4 grid-cols-3 mb-4 items-start h-">
