@@ -84,8 +84,21 @@ const NewItem = () => {
     axios
       .post("http://localhost:8000/api/item/new", item)
       .then(function (response) {
-        console.log("success new item", response)
+        console.log("success new item", response);
         alert("success");
+
+        setItem({
+          name: "",
+          weight: 0,
+          store: "",
+          date: "",
+          tracking: "",
+          state: "",
+          rcv_name: "",
+          rcv_phone: "",
+          rcv_address: "",
+        });
+        
       })
       .catch(function (error) {
         console.log(error);
@@ -230,6 +243,7 @@ const NewItem = () => {
               className="py-2 px-4 outline-red-400"
             />
           </div>
+
           {/* testing new component */}
 
           <div className="w-full mt-5 flex justify-end">

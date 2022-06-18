@@ -18,14 +18,16 @@ const DashboardLayout = () => {
       <div>
         <div className="flex flex-row bg-gray-100 full p-0">
           {" "}
-          <Sidebar />{" "}
+          <div className="w-1/5">
+            <Sidebar />{" "}
+          </div>
           <div className="w-full min-h-screen p-10">
             <Routes>
               <Route path="/" element={<Dashboard />} exact />
               <Route path="/staff" element={<Staff />} />
               <Route path="/stor" element={<Stor />} />
-              <Route path="item" element={<Item />}></Route>
-              <Route path="item/new" element={<NewItem />} />
+              <Route path="/item" element={ <Item />} />
+              <Route path="/item/new" element={<NewItem />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>{" "}
