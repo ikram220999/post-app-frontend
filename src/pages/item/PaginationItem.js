@@ -1,16 +1,21 @@
 import { Badge, Pagination, Table } from "flowbite-react";
 import React from "react";
+import { Link } from "react-router-dom";
 
-const PaginationTable = ({ data = [] , store = []}) => {
+const PaginationTable = ({ data = [], store = [] }) => {
   return (
     <div className="flex flex-col mb-4">
       <Table striped={true} className="rounded-md">
         <Table.Head>
-          <Table.HeadCell className="bg-red-500 text-white text-left">id</Table.HeadCell>
-          <Table.HeadCell className="bg-red-500 text-white text-left">Tracking</Table.HeadCell>
+          <Table.HeadCell className="bg-red-500 text-white text-left">
+            id
+          </Table.HeadCell>
+          <Table.HeadCell className="bg-red-500 text-white text-left">
+            Tracking
+          </Table.HeadCell>
 
           <Table.HeadCell className="bg-red-500 text-white">
-         Name
+            Name
           </Table.HeadCell>
           <Table.HeadCell className="bg-red-500 text-white">
             Weight (kg)
@@ -32,33 +37,31 @@ const PaginationTable = ({ data = [] , store = []}) => {
             <Table.Row className="bg-white ">
               <Table.Cell className="">{data.id}</Table.Cell>
               <Table.Cell className="whitespace-nowrap font-medium text-gray-900 ">
-              <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+                <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
                   {data.tracking_no}
                 </span>
               </Table.Cell>
               <Table.Cell className="whitespace-nowrap font-medium text-gray-900 ">
                 {data.name}
               </Table.Cell>
-              <Table.Cell>
-                  {data.weight}
-                </Table.Cell>
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 ">
+              <Table.Cell>{data.weight}</Table.Cell>
+              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 ">
                 0
               </Table.Cell>
               <Table.Cell>
                 {" "}
-                
-                {store.filter((s) => s.id == data.store_id).map((e) => {
-                    return e.name
-                }) }
+                {store
+                  .filter((s) => s.id == data.store_id)
+                  .map((e) => {
+                    return e.name;
+                  })}
               </Table.Cell>
               <Table.Cell className="flex flex-row justify-between">
-              <a
-                  href="/tables"
-                  className="font-medium text-blue-600 hover:underline "
-                >
-                  View
-                </a>
+                <Link to={'/item/' + data.id}>
+                  <a className="font-medium text-blue-600 hover:underline ">
+                    View
+                  </a>
+                </Link>
                 <a
                   href="/tables"
                   className="font-medium text-blue-600 hover:underline "
