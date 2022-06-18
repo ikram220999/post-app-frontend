@@ -2,10 +2,10 @@ import { Button, Modal } from "flowbite-react";
 import React from "react";
 
   
-  const ModalStatus = ({ show = "" }) => {
+  const ModalStatus = () => {
     return (
       <React.Fragment>
-        <Modal show={show} onClose={""}>
+        <Modal show={""} onClose={""}>
           <Modal.Header>Terms of Service</Modal.Header>
           <Modal.Body>
             <div className="space-y-6">

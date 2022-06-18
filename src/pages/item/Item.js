@@ -50,7 +50,7 @@ const Item = () => {
       <div className="flex flex-wrap gap-2 justify-between">
         <h3 className="text-xl font-semibold">Item Management</h3>
         <Link to={"/item/new"}>
-          <Button className="bg-red-400 hover:bg-red-500">+ Item</Button>
+          <Button className="bg-red-400 hover:bg-red-500 text-white" color="black">+ Item</Button>
         </Link>
       </div>{" "}
       <div>

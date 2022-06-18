@@ -98,7 +98,7 @@ const NewItem = () => {
           rcv_phone: "",
           rcv_address: "",
         });
-        
+
       })
       .catch(function (error) {
         console.log(error);
@@ -119,7 +119,7 @@ const NewItem = () => {
       </div>
       <Card className="p-4">
         <form className="flex flex-col gap-2">
-          <Button onClick={trackingGen} className="bg-red-500">
+          <Button onClick={trackingGen} className="bg-red-500 hover:bg-red-600 text-white" color="black">
             Generate Tracking
           </Button>
           <p className="text-2xl font-semibold mb-10 rounded-md bg-red-100 px-4 py-2 w-fit w-40 h-12 text-center">
@@ -250,7 +250,8 @@ const NewItem = () => {
             <Button
               onClick={handleSubmit}
               type="submit"
-              className="bg-red-600 hover:bg-red-700 "
+              className="bg-red-500 hover:bg-red-600 text-white"
+              color="asd"
             >
               Submit
             </Button>
