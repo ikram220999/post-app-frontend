@@ -1,8 +1,44 @@
 import { Badge, Pagination, Table } from "flowbite-react";
 import React from "react";
+import { render } from "react-dom";
 import { Link } from "react-router-dom";
 
 const PaginationTable = ({ data = [], store = [] }) => {
+  const getStatus = (cs) => {
+    let i = "";
+
+    switch (cs) {
+      case "O":
+        return (
+          <span class="bg-orange-100 text-orange-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+            On Delivery
+          </span>
+        );
+        break;
+      case "D":
+        return (
+          <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+            Delivered
+          </span>
+        );
+        break;
+      case "PS":
+        return (
+          <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+            Store Pickup
+          </span>
+        );
+        break;
+      case "PD":
+        return (
+          <span class="bg-yellow-100 text-yellow-600 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+            Driver Pickup
+          </span>
+        );
+        break;
+    }
+  };
+
   return (
     <div className="flex flex-col mb-4">
       <Table striped={true} className="rounded-md">
@@ -46,7 +82,7 @@ const PaginationTable = ({ data = [], store = [] }) => {
               </Table.Cell>
               <Table.Cell>{data.weight}</Table.Cell>
               <Table.Cell className="whitespace-nowrap font-medium text-gray-900 ">
-                0
+                {data.status ? <>{getStatus(data.status.code_status)}</> : ""}
               </Table.Cell>
               <Table.Cell>
                 {" "}
@@ -57,7 +93,7 @@ const PaginationTable = ({ data = [], store = [] }) => {
                   })}
               </Table.Cell>
               <Table.Cell className="flex flex-row justify-between">
-                <Link to={'/item/' + data.id}>
+                <Link to={"/item/" + data.id}>
                   <a className="font-medium text-blue-600 hover:underline ">
                     View
                   </a>
